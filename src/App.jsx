@@ -1593,7 +1593,7 @@ export default function App() {
                   {/* Ilustração do Plano Free */}
                   <div className="h-[210px] w-full flex items-center justify-center mb-8">
                     <img 
-                      src="/Group_850.png" 
+                      src="/Sign In.svg" 
                       alt="Plano Free" 
                       className="h-full object-contain select-none pointer-events-none"
                     />
@@ -1623,7 +1623,7 @@ export default function App() {
                   {/* Ilustração do Plano Médio */}
                   <div className="h-[210px] w-full flex items-center justify-center mb-8">
                     <img 
-                      src="/Group_851.png" 
+                      src="/Sign Up.svg" 
                       alt="Plano Médio" 
                       className="h-full object-contain select-none pointer-events-none"
                     />
@@ -1653,7 +1653,7 @@ export default function App() {
                   {/* Ilustração do Plano Full */}
                   <div className="h-[210px] w-full flex items-center justify-center mb-8">
                     <img 
-                      src="/Group_852.png" 
+                      src="/Sign out.svg" 
                       alt="Plano Full" 
                       className="h-full object-contain select-none pointer-events-none"
                     />
