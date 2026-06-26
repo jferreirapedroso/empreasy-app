@@ -1588,12 +1588,12 @@ export default function App() {
               <div className="bg-white p-8 rounded-[32px] border border-slate-150 flex flex-col justify-between shadow-sm hover:shadow-md transition-all">
                 <div>
                   <h3 className="text-xl font-bold text-[#004750] mb-2 font-['Nunito']">Plano Free</h3>
-                  <div className="text-3xl font-black text-[#004750] my-4 font-['Nunito']">Acesso ilimitado</div>
+                  <div className="text-3xl font-black text-[#004750] my-4 font-['Nunito']">Acesso limitado</div>
                   
                   {/* Ilustração do Plano Free */}
                   <div className="h-[210px] w-full flex items-center justify-center mb-8">
                     <img 
-                      src="/Sign In.svg" 
+                      src="/Sign out.svg" 
                       alt="Plano Free" 
                       className="h-full object-contain select-none pointer-events-none"
                     />
@@ -1653,7 +1653,7 @@ export default function App() {
                   {/* Ilustração do Plano Full */}
                   <div className="h-[210px] w-full flex items-center justify-center mb-8">
                     <img 
-                      src="/Sign out.svg" 
+                      src="/Sign In.svg" 
                       alt="Plano Full" 
                       className="h-full object-contain select-none pointer-events-none"
                     />
