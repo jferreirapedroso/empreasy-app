@@ -1202,15 +1202,18 @@ export default function App() {
       {currentScreen === 'tela_3_login' && (
         <div className="flex-1 flex flex-col md:flex-row min-h-screen justify-center items-center bg-slate-50 py-8">
           {/* Lado Esquerdo - Ilustração Oficial do Figma */}
-          <div className="hidden md:flex w-[804px] h-[900px] bg-white relative overflow-hidden rounded-l-[28px] shadow-2xl z-20 border-r border-slate-100">
-            <img 
-              src="/Rectangle_61.png" 
-              alt="Controle dos gastos e orçamentos na palma da sua mão" 
-              className="w-full h-full object-cover select-none pointer-events-none"
-            />
+          <div className="hidden md:flex w-[804px] h-[900px] bg-[#004750] relative flex-col justify-center items-center rounded-l-[28px] shadow-2xl z-20 overflow-hidden">
+            {/* Ilustração vetorial centralizada */}
+            <div className="w-[400px] h-[400px] flex items-center justify-center">
+              <img 
+                src="/Sign In.svg" 
+                alt="Controle dos gastos e orçamentos na palma da sua mão" 
+                className="w-full h-full object-contain select-none pointer-events-none"
+              />
+            </div>
             {/* Texto sobreposto com Nunito semibold 40 */}
-            <div className="absolute bottom-20 left-16 right-16 z-10 text-left">
-              <h2 className="text-[40px] font-semibold text-white font-['Nunito'] leading-[1.2] tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+            <div className="mt-8 text-center px-16 max-w-2xl">
+              <h2 className="text-[40px] font-semibold text-white font-['Nunito'] leading-[1.2] tracking-tight">
                 Controle dos gastos e orçamentos <br /> na palma da sua mão
               </h2>
             </div>
@@ -1222,19 +1225,19 @@ export default function App() {
               <div className="flex items-center justify-center gap-3 w-[358px] h-[58px] mx-auto cursor-pointer" onClick={() => setCurrentScreen('tela_1_landing')}>
                 <img src="/Vector.png" alt="Empreasy Logo" className="w-10 h-10 object-contain" />
                 <span className="text-4xl font-extrabold tracking-tight flex items-center">
-                  <span className="text-[#004650]">Empr</span>
+                  <span className="text-[#004750]">Empr</span>
                   <span className="text-[#00B3C9]">easy</span>
                 </span>
               </div>
               
-              <div className="my-auto py-6 max-w-md w-full mx-auto text-left">
-                <h3 className="text-3xl font-black text-[#004650] mb-2 font-['Nunito']">Entrar na sua conta</h3>
-                <p className="text-slate-400 text-sm mb-8 font-medium font-['Nunito']">Insira seus dados para acessar o painel administrativo</p>
+              <div className="my-auto py-6 max-w-[360px] w-full mx-auto text-left">
+                <h3 className="text-3xl font-black text-[#004750] mb-2 font-['Nunito']">Entrar na sua conta</h3>
+                <p className="text-[#808080] text-sm mb-8 font-medium font-['Nunito']">Insira seus dados para acessar o painel administrativo</p>
                 
                 <form onSubmit={handleLogarUsuario} className="space-y-4">
                   {/* Input Email com ícone */}
                   <div className="relative">
-                    <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+                    <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-[#808080]">
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                       </svg>
@@ -1245,13 +1248,13 @@ export default function App() {
                       required 
                       value={loginEmail}
                       onChange={e => setLoginEmail(e.target.value)}
-                      className="pl-12 w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-[#00B3C9] focus:ring-4 focus:ring-teal-100 transition-all font-medium text-slate-800 placeholder-slate-400 text-sm font-['Nunito']" 
+                      className="pl-12 w-full h-[60px] bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-[#00B3C9] focus:ring-4 focus:ring-[#E5F7F9] transition-all font-medium text-slate-800 placeholder-[#808080] text-sm font-['Nunito']" 
                     />
                   </div>
                   
                   {/* Input Senha com ícone */}
                   <div className="relative">
-                    <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+                    <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-[#808080]">
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                       </svg>
@@ -1262,7 +1265,7 @@ export default function App() {
                       required 
                       value={loginSenha}
                       onChange={e => setLoginSenha(e.target.value)}
-                      className="pl-12 w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-[#00B3C9] focus:ring-4 focus:ring-teal-100 transition-all font-medium text-slate-800 placeholder-slate-400 text-sm font-['Nunito']" 
+                      className="pl-12 w-full h-[60px] bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-[#00B3C9] focus:ring-4 focus:ring-[#E5F7F9] transition-all font-medium text-slate-800 placeholder-[#808080] text-sm font-['Nunito']" 
                     />
                   </div>
                   
@@ -1271,18 +1274,18 @@ export default function App() {
                     Ao criar uma conta você estará de acordo com os <span className="text-[#00B3C9] font-bold hover:underline cursor-pointer">Termos de serviço</span> e <span className="text-[#00B3C9] font-bold hover:underline cursor-pointer">Políticas de privacidade</span>.
                   </p>
                   
-                  <button type="submit" className="bg-[#00B3C9] hover:bg-[#009eb2] text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-md active:scale-[0.98] w-full text-center flex justify-center items-center gap-2 mt-4 font-['Nunito']">
+                  <button type="submit" className="bg-[#00B3C9] hover:bg-[#009eb2] text-white font-bold h-[60px] px-6 rounded-xl transition-all shadow-md active:scale-[0.98] w-full text-center flex justify-center items-center gap-2 mt-4 font-['Nunito']">
                     Entrar
                   </button>
                 </form>
                 
                 <div className="relative my-6 text-center">
                   <hr className="border-slate-100" />
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-4 text-xs font-bold text-slate-400 font-['Nunito']">ou</span>
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-4 text-xs font-bold text-[#808080] font-['Nunito']">ou</span>
                 </div>
                 
                 <div className="space-y-3">
-                  <button onClick={() => handleSocialLogin('google')} className="w-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-500 font-bold p-4 rounded-xl flex items-center justify-center gap-3 transition-all text-sm shadow-sm font-['Nunito']">
+                  <button onClick={() => handleSocialLogin('google')} className="w-full bg-white hover:bg-slate-50 border border-slate-200 text-[#808080] font-bold h-[60px] rounded-xl flex items-center justify-center gap-3 transition-all text-sm shadow-sm font-['Nunito']">
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                       <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -1291,7 +1294,7 @@ export default function App() {
                     </svg>
                     Fazer login com Google
                   </button>
-                  <button onClick={() => handleSocialLogin('facebook')} className="w-full bg-[#2d4a8a] hover:bg-[#253d72] text-white font-bold p-4 rounded-xl flex items-center justify-center gap-3 transition-all text-sm shadow-sm font-['Nunito']">
+                  <button onClick={() => handleSocialLogin('facebook')} className="w-full bg-[#3B5998] hover:bg-[#2d4373] text-white font-bold h-[60px] rounded-xl flex items-center justify-center gap-3 transition-all text-sm shadow-sm font-['Nunito']">
                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
@@ -1307,7 +1310,7 @@ export default function App() {
                 onClick={() => setCurrentScreen('tela_4_onboarding_nome')} 
                 className="text-sm text-slate-500 font-semibold font-['Nunito']"
               >
-                Não posui cadastro? <span className="text-[#00B3C9] font-bold hover:underline">Clique aqui!</span>
+                Não possui cadastro? <span className="text-[#00B3C9] font-bold hover:underline">Clique aqui!</span>
               </button>
             </div>
           </div>
@@ -1555,7 +1558,7 @@ export default function App() {
               <div className="flex items-center gap-2 w-[212px] h-[46px] cursor-pointer" onClick={() => setCurrentScreen('tela_1_landing')}>
                 <img src="/Vector.png" alt="Empreasy Logo" className="w-8 h-8 object-contain" />
                 <span className="text-3xl font-extrabold tracking-tight flex items-center">
-                  <span className="text-[#004650]">Empr</span>
+                  <span className="text-[#004750]">Empr</span>
                   <span className="text-[#00B3C9]">easy</span>
                 </span>
               </div>
@@ -1575,8 +1578,8 @@ export default function App() {
           
           <main className="max-w-6xl mx-auto px-6 py-16 w-full flex-1 flex flex-col justify-center">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-extrabold text-slate-800">Conheça nossos planos</h2>
-              <p className="text-slate-500 mt-3 font-medium text-lg">Escolha a capacidade ideal para sua gestão empresarial</p>
+              <h2 className="text-4xl font-extrabold text-[#004750] font-['Nunito']">Conheça nossos planos</h2>
+              <p className="text-[#808080] mt-3 font-medium text-lg font-['Nunito']">Escolha a capacidade ideal para sua gestão empresarial</p>
             </div>
             
             <div className="grid md:grid-cols-3 gap-8 items-stretch">
@@ -1584,76 +1587,92 @@ export default function App() {
               {/* Plano Free */}
               <div className="bg-white p-8 rounded-[32px] border border-slate-150 flex flex-col justify-between shadow-sm hover:shadow-md transition-all">
                 <div>
-                  <h3 className="text-xl font-bold text-slate-400 mb-2">Plano Free</h3>
-                  <p className="text-slate-500 font-semibold text-sm mb-6">Acesso ilimitado</p>
+                  <h3 className="text-xl font-bold text-slate-400 mb-2 font-['Nunito']">Plano Free</h3>
+                  <p className="text-slate-500 font-semibold text-sm mb-6 font-['Nunito']">Acesso ilimitado</p>
                   
-                  <div className="h-32 bg-slate-50 rounded-2xl flex items-center justify-center mb-8">
-                    <svg className="w-20 h-20 text-slate-300" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="25" y="20" width="50" height="60" rx="8" stroke="currentColor" strokeWidth="4" />
-                      <line x1="25" y1="50" x2="75" y2="50" stroke="currentColor" strokeWidth="4" />
-                      <line x1="50" y1="20" x2="50" y2="80" stroke="currentColor" strokeWidth="4" />
-                    </svg>
+                  {/* Ilustração do Plano Free */}
+                  <div className="h-[210px] w-full flex items-center justify-center mb-8">
+                    <img 
+                      src="/Group_850.png" 
+                      alt="Plano Free" 
+                      className="h-full object-contain select-none pointer-events-none"
+                    />
                   </div>
                   
-                  <ul className="space-y-4 text-sm font-semibold text-slate-600 mb-8">
-                    <li className="flex items-center gap-3"><span className="text-[#00a896]">✓</span> 10 orçamentos</li>
-                    <li className="flex items-center gap-3"><span className="text-[#00a896]">✓</span> 10 Despesas fixas</li>
-                    <li className="flex items-center gap-3"><span className="text-[#00a896]">✓</span> 10 Investimentos</li>
-                    <li className="flex items-center gap-3"><span className="text-[#00a896]">✓</span> 10 Colaboradores</li>
+                  <ul className="space-y-4 text-sm font-semibold text-slate-600 mb-8 font-['Nunito']">
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> 10 orçamentos</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> 10 Despesas fixas</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> 10 Investimentos</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> 10 Colaboradores</li>
                   </ul>
                 </div>
-                <button onClick={() => setCurrentScreen('tela_2_dashboard_hub')} className={buttonOutlineStyle}>Assinar</button>
+                <button 
+                  onClick={() => setCurrentScreen('tela_2_dashboard_hub')} 
+                  className="w-full border-2 border-[#00B3C9] hover:bg-[#E5F7F9] text-[#00B3C9] font-['Montserrat'] font-bold h-[48px] flex items-center justify-center rounded-[12px] transition-all text-center"
+                >
+                  Assinar
+                </button>
               </div>
               
               {/* Plano Médio */}
-              <div className="bg-white p-8 rounded-[32px] border-2 border-[#00a896] flex flex-col justify-between shadow-lg relative transform md:scale-105">
-                <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#00a896] text-white text-[10px] font-black uppercase px-4 py-1.5 rounded-full tracking-widest">Recomendado</span>
+              <div className="bg-white p-8 rounded-[32px] border-2 border-[#FFB61D] flex flex-col justify-between shadow-lg relative transform md:scale-105">
+                <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FFB61D] text-white text-[10px] font-black uppercase px-4 py-1.5 rounded-full tracking-widest font-['Nunito']">Recomendado</span>
                 <div>
-                  <h3 className="text-xl font-bold text-[#00a896] mb-2">Plano médio</h3>
-                  <div className="text-3xl font-black text-slate-800 my-4">R$ 200,00</div>
+                  <h3 className="text-xl font-bold text-[#FFB61D] mb-2 font-['Nunito']">Plano médio</h3>
+                  <div className="text-3xl font-black text-slate-800 my-4 font-['Nunito']">R$ 200,00</div>
                   
-                  <div className="h-32 bg-teal-50 rounded-2xl flex items-center justify-center mb-8">
-                    <svg className="w-20 h-20 text-[#00a896]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="25" y="20" width="50" height="60" rx="8" stroke="currentColor" strokeWidth="4" />
-                      <line x1="25" y1="50" x2="75" y2="50" stroke="currentColor" strokeWidth="4" />
-                      <line x1="50" y1="20" x2="50" y2="80" stroke="currentColor" strokeWidth="4" />
-                      <circle cx="50" cy="50" r="10" fill="#00a896" fillOpacity="0.2" />
-                    </svg>
+                  {/* Ilustração do Plano Médio */}
+                  <div className="h-[210px] w-full flex items-center justify-center mb-8">
+                    <img 
+                      src="/Group_851.png" 
+                      alt="Plano Médio" 
+                      className="h-full object-contain select-none pointer-events-none"
+                    />
                   </div>
                   
-                  <ul className="space-y-4 text-sm font-semibold text-slate-600 mb-8">
-                    <li className="flex items-center gap-3"><span className="text-[#00a896]">✓</span> 10 orçamentos</li>
-                    <li className="flex items-center gap-3"><span className="text-[#00a896]">✓</span> 10 Despesas fixas</li>
-                    <li className="flex items-center gap-3"><span className="text-[#00a896]">✓</span> 10 Investimentos</li>
-                    <li className="flex items-center gap-3"><span className="text-[#00a896]">✓</span> 10 Colaboradores</li>
+                  <ul className="space-y-4 text-sm font-semibold text-slate-600 mb-8 font-['Nunito']">
+                    <li className="flex items-center gap-3"><span className="text-[#FFB61D] font-bold text-lg">✓</span> 10 orçamentos</li>
+                    <li className="flex items-center gap-3"><span className="text-[#FFB61D] font-bold text-lg">✓</span> 10 Despesas fixas</li>
+                    <li className="flex items-center gap-3"><span className="text-[#FFB61D] font-bold text-lg">✓</span> 10 Investimentos</li>
+                    <li className="flex items-center gap-3"><span className="text-[#FFB61D] font-bold text-lg">✓</span> 10 Colaboradores</li>
                   </ul>
                 </div>
-                <button onClick={() => setCurrentScreen('tela_10_checkout')} className={buttonStyle}>Assinar</button>
+                <button 
+                  onClick={() => setCurrentScreen('tela_10_checkout')} 
+                  className="w-full bg-[#FFB61D] hover:bg-[#e0a019] text-white font-['Montserrat'] font-bold h-[48px] flex items-center justify-center rounded-[12px] transition-all shadow-md active:scale-95 text-center"
+                >
+                  Assinar
+                </button>
               </div>
               
               {/* Plano Full */}
-              <div className="bg-white p-8 rounded-[32px] border border-slate-150 flex flex-col justify-between shadow-sm hover:shadow-md transition-all">
+              <div className="bg-white p-8 rounded-[32px] border border-slate-150 flex flex-col justify-between shadow-sm hover:shadow-md transition-all font-['Nunito']">
                 <div>
                   <h3 className="text-xl font-bold text-slate-400 mb-2">Plano Full</h3>
                   <div className="text-3xl font-black text-slate-800 my-4">R$ 400,00</div>
                   
-                  <div className="h-32 bg-slate-50 rounded-2xl flex items-center justify-center mb-8">
-                    <svg className="w-20 h-20 text-slate-400" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="25" y="20" width="50" height="60" rx="8" stroke="currentColor" strokeWidth="4" />
-                      <line x1="25" y1="50" x2="75" y2="50" stroke="currentColor" strokeWidth="4" />
-                      <line x1="50" y1="20" x2="50" y2="80" stroke="currentColor" strokeWidth="4" />
-                      <circle cx="50" cy="50" r="10" fill="#64748b" />
-                    </svg>
+                  {/* Ilustração do Plano Full */}
+                  <div className="h-[210px] w-full flex items-center justify-center mb-8">
+                    <img 
+                      src="/Group_852.png" 
+                      alt="Plano Full" 
+                      className="h-full object-contain select-none pointer-events-none"
+                    />
                   </div>
                   
                   <ul className="space-y-4 text-sm font-semibold text-slate-600 mb-8">
-                    <li className="flex items-center gap-3"><span className="text-[#00a896]">✓</span> 10 orçamentos</li>
-                    <li className="flex items-center gap-3"><span className="text-[#00a896]">✓</span> 10 Despesas fixas</li>
-                    <li className="flex items-center gap-3"><span className="text-[#00a896]">✓</span> 10 Investimentos</li>
-                    <li className="flex items-center gap-3"><span className="text-[#00a896]">✓</span> 10 Colaboradores</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> 10 orçamentos</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> 10 Despesas fixas</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> 10 Investimentos</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> 10 Colaboradores</li>
                   </ul>
                 </div>
-                <button onClick={() => setCurrentScreen('tela_10_checkout')} className={buttonOutlineStyle}>Assinar</button>
+                <button 
+                  onClick={() => setCurrentScreen('tela_10_checkout')} 
+                  className="w-full border-2 border-[#00B3C9] hover:bg-[#E5F7F9] text-[#00B3C9] font-['Montserrat'] font-bold h-[48px] flex items-center justify-center rounded-[12px] transition-all text-center"
+                >
+                  Assinar
+                </button>
               </div>
               
             </div>
