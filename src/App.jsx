@@ -1587,8 +1587,8 @@ export default function App() {
               {/* Plano Free */}
               <div className="bg-white p-8 rounded-[32px] border border-slate-150 flex flex-col justify-between shadow-sm hover:shadow-md transition-all">
                 <div>
-                  <h3 className="text-xl font-bold text-slate-400 mb-2 font-['Nunito']">Plano Free</h3>
-                  <p className="text-slate-500 font-semibold text-sm mb-6 font-['Nunito']">Acesso ilimitado</p>
+                  <h3 className="text-xl font-bold text-[#004750] mb-2 font-['Nunito']">Plano Free</h3>
+                  <div className="text-3xl font-black text-[#004750] my-4 font-['Nunito']">Acesso ilimitado</div>
                   
                   {/* Ilustração do Plano Free */}
                   <div className="h-[210px] w-full flex items-center justify-center mb-8">
@@ -1615,11 +1615,10 @@ export default function App() {
               </div>
               
               {/* Plano Médio */}
-              <div className="bg-white p-8 rounded-[32px] border-2 border-[#FFB61D] flex flex-col justify-between shadow-lg relative transform md:scale-105">
-                <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FFB61D] text-white text-[10px] font-black uppercase px-4 py-1.5 rounded-full tracking-widest font-['Nunito']">Recomendado</span>
+              <div className="bg-white p-8 rounded-[32px] border-2 border-[#00B3C9] flex flex-col justify-between shadow-lg relative transform md:scale-105">
                 <div>
-                  <h3 className="text-xl font-bold text-[#FFB61D] mb-2 font-['Nunito']">Plano médio</h3>
-                  <div className="text-3xl font-black text-slate-800 my-4 font-['Nunito']">R$ 200,00</div>
+                  <h3 className="text-xl font-bold text-[#004750] mb-2 font-['Nunito']">Plano médio</h3>
+                  <div className="text-3xl font-black text-[#004750] my-4 font-['Nunito']">R$ 200,00</div>
                   
                   {/* Ilustração do Plano Médio */}
                   <div className="h-[210px] w-full flex items-center justify-center mb-8">
@@ -1631,15 +1630,15 @@ export default function App() {
                   </div>
                   
                   <ul className="space-y-4 text-sm font-semibold text-slate-600 mb-8 font-['Nunito']">
-                    <li className="flex items-center gap-3"><span className="text-[#FFB61D] font-bold text-lg">✓</span> 10 orçamentos</li>
-                    <li className="flex items-center gap-3"><span className="text-[#FFB61D] font-bold text-lg">✓</span> 10 Despesas fixas</li>
-                    <li className="flex items-center gap-3"><span className="text-[#FFB61D] font-bold text-lg">✓</span> 10 Investimentos</li>
-                    <li className="flex items-center gap-3"><span className="text-[#FFB61D] font-bold text-lg">✓</span> 10 Colaboradores</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> 10 orçamentos</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> 10 Despesas fixas</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> 10 Investimentos</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> 10 Colaboradores</li>
                   </ul>
                 </div>
                 <button 
                   onClick={() => setCurrentScreen('tela_10_checkout')} 
-                  className="w-full bg-[#FFB61D] hover:bg-[#e0a019] text-white font-['Montserrat'] font-bold h-[48px] flex items-center justify-center rounded-[12px] transition-all shadow-md active:scale-95 text-center"
+                  className="w-full bg-[#00B3C9] hover:bg-[#009eb2] text-white font-['Montserrat'] font-bold h-[48px] flex items-center justify-center rounded-[12px] transition-all shadow-md active:scale-95 text-center"
                 >
                   Assinar
                 </button>
@@ -1648,8 +1647,8 @@ export default function App() {
               {/* Plano Full */}
               <div className="bg-white p-8 rounded-[32px] border border-slate-150 flex flex-col justify-between shadow-sm hover:shadow-md transition-all font-['Nunito']">
                 <div>
-                  <h3 className="text-xl font-bold text-slate-400 mb-2">Plano Full</h3>
-                  <div className="text-3xl font-black text-slate-800 my-4">R$ 400,00</div>
+                  <h3 className="text-xl font-bold text-[#004750] mb-2">Plano Full</h3>
+                  <div className="text-3xl font-black text-[#004750] my-4">R$ 400,00</div>
                   
                   {/* Ilustração do Plano Full */}
                   <div className="h-[210px] w-full flex items-center justify-center mb-8">
