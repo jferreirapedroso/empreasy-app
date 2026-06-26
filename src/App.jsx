@@ -1589,7 +1589,6 @@ export default function App() {
                 <div>
                   <h3 className="text-xl font-bold text-[#004750] mb-2 font-['Nunito']">Plano Free</h3>
                   <div className="text-3xl font-black text-[#004750] my-4 font-['Nunito']">Acesso limitado</div>
-                  <div className="text-sm font-bold text-transparent mb-6 font-['Nunito'] select-none">&nbsp;</div>
                   
                   {/* Ilustração do Plano Free */}
                   <div className="h-[210px] w-full flex items-center justify-center mb-8">
@@ -1620,7 +1619,6 @@ export default function App() {
                 <div>
                   <h3 className="text-xl font-bold text-[#004750] mb-2 font-['Nunito']">Plano médio</h3>
                   <div className="text-3xl font-black text-[#004750] my-4 font-['Nunito']">R$ 200,00</div>
-                  <div className="text-sm font-bold text-transparent mb-6 font-['Nunito'] select-none">&nbsp;</div>
                   
                   {/* Ilustração do Plano Médio */}
                   <div className="h-[210px] w-full flex items-center justify-center mb-8">
@@ -1649,9 +1647,8 @@ export default function App() {
               {/* Plano Full */}
               <div className="bg-white p-8 rounded-[32px] border border-slate-150 flex flex-col justify-between shadow-sm hover:shadow-md transition-all font-['Nunito']">
                 <div>
-                  <h3 className="text-xl font-bold text-[#004750] mb-2 font-['Nunito']">Plano Full</h3>
+                  <h3 className="text-xl font-bold text-[#004750] mb-2 font-['Nunito']">Plano Full - Ilimitado</h3>
                   <div className="text-3xl font-black text-[#004750] my-4 font-['Nunito']">R$ 400,00</div>
-                  <div className="text-sm font-bold text-[#808080] mb-6 font-['Nunito']">Plano Full Ilimitado</div>
                   
                   {/* Ilustração do Plano Full */}
                   <div className="h-[210px] w-full flex items-center justify-center mb-8">
@@ -1663,10 +1660,10 @@ export default function App() {
                   </div>
                   
                   <ul className="space-y-4 text-sm font-semibold text-slate-600 mb-8 font-['Nunito']">
-                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> Orçamentos Full</li>
-                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> Despesas Fixas Full</li>
-                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> Investimentos Full</li>
-                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> Colaboradores Full</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> Orçamentos Ilimitados</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> Despesas Fixas Ilimitadas</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> Investimentos Ilimitados</li>
+                    <li className="flex items-center gap-3"><span className="text-[#00B3C9] font-bold text-lg">✓</span> Colaboradores Ilimitados</li>
                   </ul>
                 </div>
                 <button 
