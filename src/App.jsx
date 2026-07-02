@@ -1202,21 +1202,12 @@ export default function App() {
       {currentScreen === 'tela_3_login' && (
         <div className="flex-1 flex flex-col md:flex-row min-h-screen justify-center items-center bg-slate-50 py-8">
           {/* Lado Esquerdo - Ilustração Oficial do Figma */}
-          <div className="hidden md:flex w-[804px] h-[900px] bg-[#004750] relative flex-col justify-center items-center rounded-l-[28px] shadow-2xl z-20 overflow-hidden">
-            {/* Ilustração vetorial centralizada */}
-            <div className="w-[400px] h-[400px] flex items-center justify-center">
-              <img 
-                src="/Sign In.svg" 
-                alt="Controle dos gastos e orçamentos na palma da sua mão" 
-                className="w-full h-full object-contain select-none pointer-events-none"
-              />
-            </div>
-            {/* Texto sobreposto com Nunito semibold 40 */}
-            <div className="mt-8 text-center px-16 max-w-2xl">
-              <h2 className="text-[40px] font-semibold text-white font-['Nunito'] leading-[1.2] tracking-tight">
-                Controle dos gastos e orçamentos <br /> na palma da sua mão
-              </h2>
-            </div>
+          <div className="hidden md:flex w-[804px] h-[900px] bg-white relative flex-col justify-center items-center rounded-l-[28px] shadow-2xl z-20 overflow-hidden">
+            <img 
+              src="/Group_852.png" 
+              alt="Controle dos gastos e orçamentos na palma da sua mão" 
+              className="w-full h-full object-cover select-none pointer-events-none absolute inset-0"
+            />
           </div>
           
           {/* Lado Direito - Formulário */}
