@@ -255,6 +255,7 @@ export default function App() {
   // Estados dos Orçamentos (Edição/Exclusão)
   const [orcamentoSendoEditado, setOrcamentoSendoEditado] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [showUserExistsModal, setShowUserExistsModal] = useState(false);
 
   // Controlar o foco automático nos inputs de CNPJ ou CPF ao abrir a tela de cadastro de empresa
   useEffect(() => {
@@ -541,7 +542,11 @@ export default function App() {
         setCurrentScreen('tela_8_welcome_next');
       }
     } catch (err) {
-      alert('Erro no cadastro: ' + err.message);
+      if (err.message && err.message.toLowerCase().includes('already registered')) {
+        setShowUserExistsModal(true);
+      } else {
+        alert('Erro no cadastro: ' + err.message);
+      }
     }
   }
 
@@ -3926,6 +3931,46 @@ export default function App() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL: USUÁRIO JÁ CADASTRADO */}
+      {showUserExistsModal && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+          <div className="bg-white rounded-[32px] max-w-md w-full p-8 shadow-2xl border border-slate-100 text-center relative font-['Nunito'] overflow-hidden">
+            {/* Linha decorativa de topo com degradê da marca */}
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#00b3c8] to-teal-500"></div>
+            
+            {/* Ícone de Alerta Animado */}
+            <div className="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-6 mt-2 text-[#00b3c8]">
+              <svg className="w-10 h-10" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+            </div>
+            
+            <h3 className="text-2xl font-bold text-[#004750] mb-3 font-['Nunito']">Usuário já cadastrado</h3>
+            <p className="text-slate-500 mb-8 font-medium leading-relaxed font-['Nunito']">
+              Deseja ir para a Área de Login?
+            </p>
+            
+            <div className="flex gap-4">
+              <button 
+                onClick={() => setShowUserExistsModal(false)}
+                className="w-1/2 h-[52px] bg-white border border-[#00B3C9] text-[#00B3C9] hover:bg-[#E5F7F9] font-bold rounded-xl transition-all text-center flex justify-center items-center font-['Nunito']"
+              >
+                Voltar
+              </button>
+              <button 
+                onClick={() => {
+                  setShowUserExistsModal(false);
+                  setCurrentScreen('tela_3_login');
+                }}
+                className="w-1/2 h-[52px] bg-[#00B3C9] hover:bg-[#009cb0] text-white font-bold rounded-xl transition-all shadow-md active:scale-[0.98] text-center flex justify-center items-center font-['Nunito']"
+              >
+                Login
+              </button>
+            </div>
           </div>
         </div>
       )}
