@@ -1312,54 +1312,50 @@ export default function App() {
           TELAS 4, 5, 6, 7: ONBOARDING DE IDENTIFICAÇÃO (Split Screen)
          ========================================================================= */}
       {['tela_4_onboarding_nome', 'tela_5_onboarding_cpf', 'tela_6_onboarding_email', 'tela_7_onboarding_senha'].includes(currentScreen) && (
-        <div className="flex-1 flex flex-col md:flex-row min-h-screen">
+        <div className="flex-1 flex flex-col md:flex-row min-h-screen bg-white">
           {/* Lado Esquerdo - Painel Informativo com Ilustrações Dinâmicas */}
-          <div className="w-full md:flex-1 bg-[#00a896] p-8 md:p-16 flex flex-col justify-between text-white relative">
-            <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+          <div className="w-full md:flex-1 bg-[#00b3c8] relative flex flex-col justify-between text-white overflow-hidden min-h-[300px] md:min-h-0">
+            {/* Imagem de Fundo Oficial do Figma (Frame 521) */}
+            <div className="absolute inset-0 w-full h-full">
+              <img 
+                src={
+                  currentScreen === 'tela_4_onboarding_nome' ? '/Frame_521.png' :
+                  currentScreen === 'tela_5_onboarding_cpf' ? '/Frame_521_1.png' :
+                  currentScreen === 'tela_6_onboarding_email' ? '/Frame_521_2.png' :
+                  '/Frame_521_2.png' // fallback para senha
+                } 
+                alt="Bem vindo ao Empreasy" 
+                className="w-full h-full object-cover select-none pointer-events-none"
+              />
+            </div>
             
-            <div>
-              <span className="inline-block text-xs font-bold uppercase tracking-widest bg-teal-800 bg-opacity-40 px-4 py-1.5 rounded-full border border-teal-600/30">
+            {/* Indicador de Progresso sobreposto no canto inferior esquerdo */}
+            <div className="relative z-10 mt-auto p-8 md:p-16 flex flex-col gap-2">
+              <span className="text-sm font-bold tracking-wide text-white font-['Nunito']">
                 1. Identificação
               </span>
-              <h2 className="text-4xl md:text-5xl font-black mt-8 mb-4 tracking-tight">Bem vindo ao Empreasy! 😊</h2>
-              <p className="text-teal-50 text-base md:text-lg max-w-md font-medium leading-relaxed">
-                Estamos aqui para ajudá-lo! Então, que tal nos conhecermos um pouco mais?
-              </p>
-            </div>
-            
-            <div className="my-10">
-              {currentScreen === 'tela_4_onboarding_nome' && renderIllustrationMagnifyingGlass()}
-              {currentScreen === 'tela_5_onboarding_cpf' && renderIllustrationBottle()}
-              {currentScreen === 'tela_6_onboarding_email' && renderIllustrationMailman()}
-              {currentScreen === 'tela_7_onboarding_senha' && renderIllustrationSafe()}
-            </div>
-            
-            {/* Indicador de Progresso (Bottom) */}
-            <div className="flex items-center gap-3">
-              <div className={`h-2.5 rounded-full transition-all duration-300 ${currentScreen === 'tela_4_onboarding_nome' ? 'w-12 bg-white' : 'w-6 bg-teal-700/50'}`}></div>
-              <div className={`h-2.5 rounded-full transition-all duration-300 ${currentScreen === 'tela_5_onboarding_cpf' ? 'w-12 bg-white' : 'w-6 bg-teal-700/50'}`}></div>
-              <div className={`h-2.5 rounded-full transition-all duration-300 ${currentScreen === 'tela_6_onboarding_email' ? 'w-12 bg-white' : 'w-6 bg-teal-700/50'}`}></div>
-              <div className={`h-2.5 rounded-full transition-all duration-300 ${currentScreen === 'tela_7_onboarding_senha' ? 'w-12 bg-white' : 'w-6 bg-teal-700/50'}`}></div>
+              
+              <div className="flex items-center gap-3">
+                <div className={`h-1.5 rounded-full transition-all duration-300 ${currentScreen === 'tela_4_onboarding_nome' ? 'w-16 bg-white' : 'w-8 bg-white/40'}`}></div>
+                <div className={`h-1.5 rounded-full transition-all duration-300 ${currentScreen === 'tela_5_onboarding_cpf' ? 'w-16 bg-white' : 'w-8 bg-white/40'}`}></div>
+                <div className={`h-1.5 rounded-full transition-all duration-300 ${currentScreen === 'tela_6_onboarding_email' ? 'w-16 bg-white' : 'w-8 bg-white/40'}`}></div>
+                <div className={`h-1.5 rounded-full transition-all duration-300 ${currentScreen === 'tela_7_onboarding_senha' ? 'w-16 bg-white' : 'w-8 bg-white/40'}`}></div>
+              </div>
             </div>
           </div>
           
           {/* Lado Direito - Pergunta do Fluxo */}
-          <div className="w-full md:w-[500px] bg-white p-8 md:p-12 flex flex-col justify-between">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-              <span className="text-xs font-bold text-slate-400">PASSO {currentScreen === 'tela_4_onboarding_nome' ? '1' : currentScreen === 'tela_5_onboarding_cpf' ? '2' : currentScreen === 'tela_6_onboarding_email' ? '3' : '4'} DE 4</span>
-              <button onClick={() => setCurrentScreen('tela_1_landing')} className="text-xs font-bold text-slate-400 hover:text-slate-600 transition-all">Cancelar</button>
-            </div>
-            
-            <div className="my-auto py-10 max-w-sm w-full mx-auto">
+          <div className="w-full md:flex-1 bg-white p-8 md:p-16 flex flex-col justify-center">
+            <div className="max-w-[360px] w-full mx-auto">
               {currentScreen === 'tela_4_onboarding_nome' && (
                 <div className="space-y-6">
-                  <h3 className="text-3xl font-black text-slate-800">Qual o seu nome?</h3>
+                  <h3 className="text-[32px] font-bold text-[#004750] font-['Nunito'] tracking-tight">Qual o seu nome?</h3>
                   <input 
                     type="text" 
-                    placeholder="Nome e Sobrenome" 
+                    placeholder="Nome" 
                     value={userProfile.nome} 
                     onChange={(e) => { setValidationError(''); setUserProfile({...userProfile, nome: e.target.value}); }} 
-                    className={textInputStyle} 
+                    className="pl-4 w-full h-[60px] bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-[#00B3C9] focus:ring-4 focus:ring-[#E5F7F9] transition-all font-medium text-slate-800 placeholder-[#808080] text-sm font-['Nunito']" 
                   />
                   {validationError && (
                     <p className="text-red-500 text-sm font-semibold mt-1">{validationError}</p>
@@ -1375,28 +1371,43 @@ export default function App() {
                       setValidationError('');
                       setCurrentScreen('tela_5_onboarding_cpf');
                     }} 
-                    className={buttonStyle}
+                    className="w-full h-[60px] bg-[#00B3C9] hover:bg-[#009cb0] text-white font-bold rounded-xl transition-all shadow-md active:scale-[0.98] text-center flex justify-center items-center font-['Nunito']"
                   >
                     Ok
                   </button>
+                  
+                  <p className="text-xs text-slate-400 font-medium font-['Nunito'] mt-6">
+                    Precisa de ajuda?{' '}
+                    <span 
+                      onClick={() => setCurrentScreen('tela_fale_conosco')} 
+                      className="text-[#5B73E8] font-bold hover:underline cursor-pointer"
+                    >
+                      Entre em contato
+                    </span>
+                  </p>
                 </div>
               )}
 
               {currentScreen === 'tela_5_onboarding_cpf' && (
                 <div className="space-y-6">
-                  <h3 className="text-3xl font-black text-slate-800">Seu CPF?</h3>
+                  <h3 className="text-[32px] font-bold text-[#004750] font-['Nunito'] tracking-tight">Seu CPF?</h3>
                   <input 
                     type="text" 
                     placeholder="CPF (apenas números)" 
                     value={userProfile.cpf} 
                     onChange={(e) => { setValidationError(''); setUserProfile({...userProfile, cpf: formatarCPF(e.target.value)}); }} 
-                    className={textInputStyle} 
+                    className="pl-4 w-full h-[60px] bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-[#00B3C9] focus:ring-4 focus:ring-[#E5F7F9] transition-all font-medium text-slate-800 placeholder-[#808080] text-sm font-['Nunito']" 
                   />
                   {validationError && (
                     <p className="text-red-500 text-sm font-semibold mt-1">{validationError}</p>
                   )}
                   <div className="flex gap-3">
-                    <button onClick={() => { setValidationError(''); setCurrentScreen('tela_4_onboarding_nome'); }} className={buttonOutlineStyle}>Voltar</button>
+                    <button 
+                      onClick={() => { setValidationError(''); setCurrentScreen('tela_4_onboarding_nome'); }} 
+                      className="w-1/3 h-[60px] bg-white border border-[#00B3C9] text-[#00B3C9] hover:bg-[#E5F7F9] font-bold rounded-xl transition-all text-center flex justify-center items-center font-['Nunito']"
+                    >
+                      Voltar
+                    </button>
                     <button 
                       onClick={() => {
                         if (!validarCPF(userProfile.cpf)) {
@@ -1406,29 +1417,44 @@ export default function App() {
                         setValidationError('');
                         setCurrentScreen('tela_6_onboarding_email');
                       }} 
-                      className={buttonStyle}
+                      className="w-2/3 h-[60px] bg-[#00B3C9] hover:bg-[#009cb0] text-white font-bold rounded-xl transition-all shadow-md active:scale-[0.98] text-center flex justify-center items-center font-['Nunito']"
                     >
                       Ok
                     </button>
                   </div>
+                  
+                  <p className="text-xs text-slate-400 font-medium font-['Nunito'] mt-6">
+                    Precisa de ajuda?{' '}
+                    <span 
+                      onClick={() => setCurrentScreen('tela_fale_conosco')} 
+                      className="text-[#5B73E8] font-bold hover:underline cursor-pointer"
+                    >
+                      Entre em contato
+                    </span>
+                  </p>
                 </div>
               )}
 
               {currentScreen === 'tela_6_onboarding_email' && (
                 <div className="space-y-6">
-                  <h3 className="text-3xl font-black text-slate-800">E seu e-mail?</h3>
+                  <h3 className="text-[32px] font-bold text-[#004750] font-['Nunito'] tracking-tight">E seu e-mail?</h3>
                   <input 
                     type="email" 
                     placeholder="E-mail" 
                     value={userProfile.email} 
                     onChange={(e) => { setValidationError(''); setUserProfile({...userProfile, email: e.target.value}); }} 
-                    className={textInputStyle} 
+                    className="pl-4 w-full h-[60px] bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-[#00B3C9] focus:ring-4 focus:ring-[#E5F7F9] transition-all font-medium text-slate-800 placeholder-[#808080] text-sm font-['Nunito']" 
                   />
                   {validationError && (
                     <p className="text-red-500 text-sm font-semibold mt-1">{validationError}</p>
                   )}
                   <div className="flex gap-3">
-                    <button onClick={() => { setValidationError(''); setCurrentScreen('tela_5_onboarding_cpf'); }} className={buttonOutlineStyle}>Voltar</button>
+                    <button 
+                      onClick={() => { setValidationError(''); setCurrentScreen('tela_5_onboarding_cpf'); }} 
+                      className="w-1/3 h-[60px] bg-white border border-[#00B3C9] text-[#00B3C9] hover:bg-[#E5F7F9] font-bold rounded-xl transition-all text-center flex justify-center items-center font-['Nunito']"
+                    >
+                      Voltar
+                    </button>
                     <button 
                       onClick={() => {
                         if (!validarEmail(userProfile.email)) {
@@ -1438,17 +1464,27 @@ export default function App() {
                         setValidationError('');
                         setCurrentScreen('tela_7_onboarding_senha');
                       }} 
-                      className={buttonStyle}
+                      className="w-2/3 h-[60px] bg-[#00B3C9] hover:bg-[#009cb0] text-white font-bold rounded-xl transition-all shadow-md active:scale-[0.98] text-center flex justify-center items-center font-['Nunito']"
                     >
                       Ok
                     </button>
                   </div>
+                  
+                  <p className="text-xs text-slate-400 font-medium font-['Nunito'] mt-6">
+                    Precisa de ajuda?{' '}
+                    <span 
+                      onClick={() => setCurrentScreen('tela_fale_conosco')} 
+                      className="text-[#5B73E8] font-bold hover:underline cursor-pointer"
+                    >
+                      Entre em contato
+                    </span>
+                  </p>
                 </div>
               )}
 
               {currentScreen === 'tela_7_onboarding_senha' && (
                 <div className="space-y-6">
-                  <h3 className="text-3xl font-black text-slate-800">Crie uma senha</h3>
+                  <h3 className="text-[32px] font-bold text-[#004750] font-['Nunito'] tracking-tight">Crie uma senha</h3>
                   <div className="space-y-4">
                     <div>
                       <input 
@@ -1456,7 +1492,7 @@ export default function App() {
                         placeholder="Senha (mínimo 6 caracteres)" 
                         value={userProfile.senha} 
                         onChange={(e) => { setValidationError(''); setUserProfile({...userProfile, senha: e.target.value}); }} 
-                        className={textInputStyle} 
+                        className="pl-4 w-full h-[60px] bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-[#00B3C9] focus:ring-4 focus:ring-[#E5F7F9] transition-all font-medium text-slate-800 placeholder-[#808080] text-sm font-['Nunito']" 
                       />
                     </div>
                     <div>
@@ -1465,7 +1501,7 @@ export default function App() {
                         placeholder="Redigite a senha" 
                         value={confirmarSenha} 
                         onChange={(e) => { setValidationError(''); setConfirmarSenha(e.target.value); }} 
-                        className={textInputStyle} 
+                        className="pl-4 w-full h-[60px] bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-[#00B3C9] focus:ring-4 focus:ring-[#E5F7F9] transition-all font-medium text-slate-800 placeholder-[#808080] text-sm font-['Nunito']" 
                       />
                     </div>
                   </div>
@@ -1473,7 +1509,12 @@ export default function App() {
                     <p className="text-red-500 text-sm font-semibold mt-1">{validationError}</p>
                   )}
                   <div className="flex gap-3">
-                    <button onClick={() => { setValidationError(''); setCurrentScreen('tela_6_onboarding_email'); }} className={buttonOutlineStyle}>Voltar</button>
+                    <button 
+                      onClick={() => { setValidationError(''); setCurrentScreen('tela_6_onboarding_email'); }} 
+                      className="w-1/3 h-[60px] bg-white border border-[#00B3C9] text-[#00B3C9] hover:bg-[#E5F7F9] font-bold rounded-xl transition-all text-center flex justify-center items-center font-['Nunito']"
+                    >
+                      Voltar
+                    </button>
                     <button 
                       onClick={() => {
                         if (!userProfile.senha || userProfile.senha.length < 6) {
@@ -1487,17 +1528,23 @@ export default function App() {
                         setValidationError('');
                         handleRegistrarUsuario();
                       }} 
-                      className={buttonStyle}
+                      className="w-2/3 h-[60px] bg-[#00B3C9] hover:bg-[#009cb0] text-white font-bold rounded-xl transition-all shadow-md active:scale-[0.98] text-center flex justify-center items-center font-['Nunito']"
                     >
                       Ok
                     </button>
                   </div>
+                  
+                  <p className="text-xs text-slate-400 font-medium font-['Nunito'] mt-6">
+                    Precisa de ajuda?{' '}
+                    <span 
+                      onClick={() => setCurrentScreen('tela_fale_conosco')} 
+                      className="text-[#5B73E8] font-bold hover:underline cursor-pointer"
+                    >
+                      Entre em contato
+                    </span>
+                  </p>
                 </div>
               )}
-            </div>
-            
-            <div className="text-center text-xs font-semibold text-slate-400 hover:text-[#00a896] cursor-pointer hover:underline">
-              Precisa de ajuda? Entre em contato
             </div>
           </div>
         </div>
