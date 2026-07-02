@@ -245,11 +245,11 @@ export default function App() {
   }, [currentScreen, activeTab, subTabEmpresa]);
 
   // Estados dos Dados Cadastrais & Perfil
-  const [userProfile, setUserProfile] = useState({ nome: 'Mariane Soares', cargo: 'Administrador', cpf: '', email: '', senha: '' });
+  const [userProfile, setUserProfile] = useState({ nome: '', cargo: 'Administrador', cpf: '', email: '', senha: '' });
   const [empresaTipo, setEmpresaTipo] = useState('Sim'); // 'Sim' ou 'Não'
   const [empresaInfo, setEmpresaInfo] = useState({
     cnpj: '', razaoSocial: '', nomeFantasia: '', setor: 'Tecnologia & Software',
-    cep: '', rua: '', numero: '', cidade: '', estado: '', responsavel: 'Mariane Soares'
+    cep: '', rua: '', numero: '', cidade: '', estado: '', responsavel: ''
   });
 
   // Estados dos Orçamentos (Edição/Exclusão)
@@ -414,10 +414,10 @@ export default function App() {
           { id: 5, titulo: 'Business Events', valor: 5000.00, vendedor: 'Marcus Coelho', status: 'Pendente' },
           { id: 6, titulo: 'Working abc', valor: 5000.00, vendedor: 'Marcus Coelho', status: 'Pendente' }
         ]);
-        setUserProfile({ nome: 'Mariane Soares', cargo: 'Administrador', cpf: '', email: '', senha: '' });
+        setUserProfile({ nome: '', cargo: 'Administrador', cpf: '', email: '', senha: '' });
         setEmpresaInfo({
           cnpj: '', razaoSocial: '', nomeFantasia: '', setor: 'Tecnologia & Software',
-          cep: '', rua: '', numero: '', cidade: '', estado: '', responsavel: 'Mariane Soares'
+          cep: '', rua: '', numero: '', cidade: '', estado: '', responsavel: ''
         });
       }
     });
@@ -1352,7 +1352,7 @@ export default function App() {
                   <h3 className="text-[32px] font-bold text-[#004750] font-['Nunito'] tracking-tight">Qual o seu nome?</h3>
                   <input 
                     type="text" 
-                    placeholder="Nome" 
+                    placeholder="Nome Completo" 
                     value={userProfile.nome} 
                     onChange={(e) => { setValidationError(''); setUserProfile({...userProfile, nome: e.target.value}); }} 
                     className="pl-4 w-full h-[60px] bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-[#00B3C9] focus:ring-4 focus:ring-[#E5F7F9] transition-all font-medium text-slate-800 placeholder-[#808080] text-sm font-['Nunito']" 
