@@ -1442,7 +1442,7 @@ export default function App() {
                     type="email" 
                     placeholder="E-mail" 
                     value={userProfile.email} 
-                    onChange={(e) => { setValidationError(''); setUserProfile({...userProfile, email: e.target.value}); }} 
+                    onChange={(e) => { setValidationError(''); setUserProfile({...userProfile, email: e.target.value.toLowerCase()}); }} 
                     className="pl-4 w-full h-[60px] bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-[#00B3C9] focus:ring-4 focus:ring-[#E5F7F9] transition-all font-medium text-slate-800 placeholder-[#808080] text-sm font-['Nunito']" 
                   />
                   {validationError && (
