@@ -255,7 +255,29 @@ export default function App() {
   // Estados dos Orçamentos (Edição/Exclusão)
   const [orcamentoSendoEditado, setOrcamentoSendoEditado] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [showUserExistsModal, setShowUserExistsModal] = useState(false);
+  const [notification, setNotification] = useState({
+    isOpen: false,
+    title: '',
+    message: '',
+    type: 'success',
+    onConfirm: null,
+    confirmText: 'Ok'
+  });
+
+  function showNotification(title, message, type = 'success', onConfirm = null, confirmText = 'Ok') {
+    setNotification({
+      isOpen: true,
+      title,
+      message,
+      type,
+      onConfirm,
+      confirmText
+    });
+  }
+
+  function closeNotification() {
+    setNotification(prev => ({ ...prev, isOpen: false }));
+  }
 
   // Controlar o foco automático nos inputs de CNPJ ou CPF ao abrir a tela de cadastro de empresa
   useEffect(() => {
@@ -507,7 +529,7 @@ export default function App() {
   // Cadastro de Novo Usuário (Onboarding)
   async function handleRegistrarUsuario() {
     if (!userProfile.email || !userProfile.senha) {
-      alert('E-mail e senha são obrigatórios.');
+      showNotification('Aviso', 'E-mail e senha são obrigatórios.', 'warning');
       return;
     }
     try {
@@ -538,14 +560,20 @@ export default function App() {
           console.warn("Direct profile insert fallback error:", dbErr.message);
         }
         
-        alert('Cadastro realizado com sucesso!');
+        showNotification('Sucesso', 'Cadastro realizado com sucesso!', 'success');
         setCurrentScreen('tela_8_welcome_next');
       }
     } catch (err) {
       if (err.message && err.message.toLowerCase().includes('already registered')) {
-        setShowUserExistsModal(true);
+        showNotification(
+          'Usuário já cadastrado',
+          'Deseja ir para a Área de Login?',
+          'warning',
+          () => setCurrentScreen('tela_3_login'),
+          'Login'
+        );
       } else {
-        alert('Erro no cadastro: ' + err.message);
+        showNotification('Erro', 'Erro no cadastro: ' + err.message, 'error');
       }
     }
   }
@@ -554,7 +582,7 @@ export default function App() {
   async function handleLogarUsuario(e) {
     e.preventDefault();
     if (!loginEmail || !loginSenha) {
-      alert('Preencha o e-mail e a senha.');
+      showNotification('Aviso', 'Preencha o e-mail e a senha.', 'warning');
       return;
     }
     try {
@@ -564,11 +592,11 @@ export default function App() {
       });
       if (error) throw error;
       if (data && data.user) {
-        alert('Login efetuado com sucesso!');
+        showNotification('Sucesso', 'Login efetuado com sucesso!', 'success');
         setCurrentScreen('tela_2_dashboard_hub');
       }
     } catch (err) {
-      alert('Erro no login: ' + err.message);
+      showNotification('Erro', 'Erro no login: ' + err.message, 'error');
     }
   }
 
@@ -580,7 +608,7 @@ export default function App() {
       });
       if (error) throw error;
     } catch (err) {
-      alert(`Erro no login com ${provider}: ` + err.message);
+      showNotification('Erro', `Erro no login com ${provider}: ` + err.message, 'error');
     }
   }
 
@@ -696,7 +724,7 @@ export default function App() {
       setCurrentScreen('tela_onboard_despesas_wizard');
     } catch (err) {
       console.error(err);
-      alert('Erro ao salvar dados da empresa: ' + err.message);
+      showNotification('Erro', 'Erro ao salvar dados da empresa: ' + err.message, 'error');
       setCurrentScreen('tela_onboard_despesas_wizard');
     }
   }
@@ -704,7 +732,7 @@ export default function App() {
   // Ações de Escrita no Banco
   async function handleSalvarColaborador() {
     if (!novoColab.nome || !novoColab.cargo || !novoColab.remuneracao) {
-      alert('Por favor, preencha o nome, cargo e remuneração.');
+      showNotification('Aviso', 'Por favor, preencha o nome, cargo e remuneração.', 'warning');
       return;
     }
 
@@ -726,11 +754,11 @@ export default function App() {
       } else {
         setColaboradoresEstoque([...colaboradoresEstoque, { id: Date.now().toString(), ...colabObj }]);
       }
-      alert('Colaborador adicionado com sucesso!');
+      showNotification('Sucesso', 'Colaborador adicionado com sucesso!', 'success');
     } catch (err) {
       console.error(err);
       setColaboradoresEstoque([...colaboradoresEstoque, { id: Date.now().toString(), ...colabObj }]);
-      alert('Adicionado localmente (banco de dados offline).');
+      showNotification('Modo Offline', 'Adicionado localmente (banco de dados offline).', 'info');
     }
 
     setNovoColab({ nome: '', cargo: '', setor: 'Marketing', remuneracao: '', horasDia: '8', diasSemana: '5' });
@@ -790,7 +818,7 @@ export default function App() {
 
   async function handleSalvarOrcamento() {
     if (!novoOrcamentoForm.titulo) {
-      alert('Insira o título do projeto.');
+      showNotification('Aviso', 'Insira o título do projeto.', 'warning');
       return;
     }
     const val = calcTab === 'servico' ? 200000 : Number(novoOrcamentoForm.valorProduto) * Number(calcMarkup());
@@ -817,12 +845,12 @@ export default function App() {
       } else {
         setOrcamentos([...orcamentos, { id: Date.now().toString(), ...orcObj }]);
       }
-      alert('Orçamento gravado com sucesso!');
+      showNotification('Sucesso', 'Orçamento gravado com sucesso!', 'success');
       setActiveTab('orcamentos');
     } catch (err) {
       console.error(err);
       setOrcamentos([...orcamentos, { id: Date.now().toString(), ...orcObj }]);
-      alert('Gravado localmente (banco de dados offline).');
+      showNotification('Modo Offline', 'Gravado localmente (banco de dados offline).', 'info');
       setActiveTab('orcamentos');
     }
   }
@@ -842,10 +870,10 @@ export default function App() {
         if (error) throw error;
       }
       setOrcamentos(prev => prev.filter(o => o.id.toString() !== orcId.toString()));
-      alert("Orçamento excluído com sucesso!");
+      showNotification('Sucesso', 'Orçamento excluído com sucesso!', 'success');
     } catch (err) {
       console.error("Erro ao excluir orçamento:", err);
-      alert("Erro ao excluir orçamento: " + err.message);
+      showNotification('Erro', 'Erro ao excluir orçamento: ' + err.message, 'error');
     }
   }
 
@@ -859,7 +887,7 @@ export default function App() {
   async function handleSalvarEdicaoOrcamento(e) {
     e.preventDefault();
     if (!orcamentoSendoEditado.titulo) {
-      alert("O título do projeto é obrigatório.");
+      showNotification('Aviso', 'O título do projeto é obrigatório.', 'warning');
       return;
     }
     try {
@@ -888,10 +916,10 @@ export default function App() {
       setOrcamentos(prev => prev.map(o => o.id.toString() === orcId.toString() ? { ...o, ...updatedObj } : o));
       setIsEditModalOpen(false);
       setOrcamentoSendoEditado(null);
-      alert("Orçamento atualizado com sucesso!");
+      showNotification('Sucesso', 'Orçamento atualizado com sucesso!', 'success');
     } catch (err) {
       console.error("Erro ao salvar edição de orçamento:", err);
-      alert("Erro ao salvar orçamento: " + err.message);
+      showNotification('Erro', 'Erro ao salvar orçamento: ' + err.message, 'error');
     }
   }
 
@@ -915,10 +943,10 @@ export default function App() {
   const handleEnviarOrcamento = (e) => {
     e.preventDefault();
     if (!emailCliente) {
-      alert('Insira um e-mail válido.');
+      showNotification('Aviso', 'Insira um e-mail válido.', 'warning');
       return;
     }
-    alert(`Orçamento "${orcamentoSelecionado?.titulo || 'Business Events'}" enviado com sucesso para ${emailCliente}!`);
+    showNotification('Sucesso', `Orçamento "${orcamentoSelecionado?.titulo || 'Business Events'}" enviado com sucesso para ${emailCliente}!`, 'success');
     setEmailCliente('');
     setActiveTab('orcamentos');
   };
@@ -3462,7 +3490,7 @@ export default function App() {
                     </div>
 
                     <div 
-                      onClick={() => alert('Recurso em desenvolvimento: Editar Empresa.')} 
+                      onClick={() => showNotification('Em Desenvolvimento', 'Recurso em desenvolvimento: Editar Empresa.', 'info')} 
                       className="bg-white p-8 rounded-3xl border border-slate-150 hover:border-[#00a896] transition-all cursor-pointer shadow-sm hover:shadow-md text-center space-y-4"
                     >
                       <div className="w-16 h-16 rounded-full bg-amber-50 text-amber-500 font-bold flex items-center justify-center text-3xl mx-auto">
@@ -3806,7 +3834,7 @@ export default function App() {
             </form>
 
             <button 
-              onClick={() => alert('Download do PDF iniciado com sucesso!')}
+              onClick={() => showNotification('Sucesso', 'Download do PDF iniciado com sucesso!', 'success')}
               className="w-full text-center text-xs font-bold text-[#00a896] mt-6 flex justify-center items-center gap-2 hover:underline"
             >
               📄 Baixar orçamento em PDF
@@ -3935,41 +3963,79 @@ export default function App() {
         </div>
       )}
 
-      {/* MODAL: USUÁRIO JÁ CADASTRADO */}
-      {showUserExistsModal && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
-          <div className="bg-white rounded-[32px] max-w-md w-full p-8 shadow-2xl border border-slate-100 text-center relative font-['Nunito'] overflow-hidden">
-            {/* Linha decorativa de topo com degradê da marca */}
-            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#00b3c8] to-teal-500"></div>
+      {/* MODAL GLOBAL DE NOTIFICAÇÃO */}
+      {notification.isOpen && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[99999] flex items-center justify-center p-4">
+          <div className="bg-white rounded-[32px] max-w-md w-full p-8 shadow-2xl border border-slate-100 text-center relative font-['Nunito'] overflow-hidden animate-[scaleIn_0.2s_ease-out]">
+            {/* Linha decorativa de topo com degradê baseado no tipo */}
+            <div className={`absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${
+              notification.type === 'success' ? 'from-[#00b3c8] to-teal-500' :
+              notification.type === 'error' ? 'from-red-550 to-rose-500' :
+              notification.type === 'warning' ? 'from-amber-500 to-orange-400' :
+              'from-[#00b3c8] to-indigo-500'
+            }`}></div>
             
-            {/* Ícone de Alerta Animado */}
-            <div className="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-6 mt-2 text-[#00b3c8]">
-              <svg className="w-10 h-10" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-              </svg>
+            {/* Ícone customizado baseado no tipo */}
+            <div className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 mt-2 ${
+              notification.type === 'success' ? 'bg-teal-50 text-[#00b3c8]' :
+              notification.type === 'error' ? 'bg-red-50 text-red-550' :
+              notification.type === 'warning' ? 'bg-amber-50 text-amber-500' :
+              'bg-blue-50 text-blue-500'
+            }`}>
+              {notification.type === 'success' && (
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+                </svg>
+              )}
+              {notification.type === 'error' && (
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
+                </svg>
+              )}
+              {notification.type === 'warning' && (
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+              )}
+              {notification.type === 'info' && (
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 111.085 1.085l-.04.04m-1.085 1.085h1.086m-1.086 0a1.125 1.125 0 110-2.25h1.086m-1.086 2.25v2.25M6 3.75h12A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75z"></path>
+                </svg>
+              )}
             </div>
             
-            <h3 className="text-2xl font-bold text-[#004750] mb-3 font-['Nunito']">Usuário já cadastrado</h3>
-            <p className="text-slate-500 mb-8 font-medium leading-relaxed font-['Nunito']">
-              Deseja ir para a Área de Login?
+            <h3 className="text-2xl font-bold text-[#004750] mb-3 font-['Nunito']">{notification.title}</h3>
+            <p className="text-slate-500 mb-8 font-medium leading-relaxed font-['Nunito'] text-sm px-4">
+              {notification.message}
             </p>
             
-            <div className="flex gap-4">
-              <button 
-                onClick={() => setShowUserExistsModal(false)}
-                className="w-1/2 h-[52px] bg-white border border-[#00B3C9] text-[#00B3C9] hover:bg-[#E5F7F9] font-bold rounded-xl transition-all text-center flex justify-center items-center font-['Nunito']"
-              >
-                Voltar
-              </button>
-              <button 
-                onClick={() => {
-                  setShowUserExistsModal(false);
-                  setCurrentScreen('tela_3_login');
-                }}
-                className="w-1/2 h-[52px] bg-[#00B3C9] hover:bg-[#009cb0] text-white font-bold rounded-xl transition-all shadow-md active:scale-[0.98] text-center flex justify-center items-center font-['Nunito']"
-              >
-                Login
-              </button>
+            <div className="flex gap-4 justify-center">
+              {notification.onConfirm ? (
+                <>
+                  <button 
+                    onClick={closeNotification}
+                    className="w-1/2 h-[52px] bg-white border border-[#00B3C9] text-[#00B3C9] hover:bg-[#E5F7F9] font-bold rounded-xl transition-all text-center flex justify-center items-center font-['Nunito']"
+                  >
+                    Voltar
+                  </button>
+                  <button 
+                    onClick={() => {
+                      closeNotification();
+                      if (notification.onConfirm) notification.onConfirm();
+                    }}
+                    className="w-1/2 h-[52px] bg-[#00B3C9] hover:bg-[#009cb0] text-white font-bold rounded-xl transition-all shadow-md active:scale-[0.98] text-center flex justify-center items-center font-['Nunito']"
+                  >
+                    {notification.confirmText}
+                  </button>
+                </>
+              ) : (
+                <button 
+                  onClick={closeNotification}
+                  className="w-full h-[52px] bg-[#00B3C9] hover:bg-[#009cb0] text-white font-bold rounded-xl transition-all shadow-md active:scale-[0.98] text-center flex justify-center items-center font-['Nunito']"
+                >
+                  {notification.confirmText}
+                </button>
+              )}
             </div>
           </div>
         </div>
