@@ -1354,7 +1354,7 @@ export default function App() {
                     type="text" 
                     placeholder="Nome Completo" 
                     value={userProfile.nome} 
-                    onChange={(e) => { setValidationError(''); setUserProfile({...userProfile, nome: e.target.value}); }} 
+                    onChange={(e) => { setValidationError(''); setUserProfile({...userProfile, nome: capitalizeWords(e.target.value)}); }} 
                     className="pl-4 w-full h-[60px] bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-[#00B3C9] focus:ring-4 focus:ring-[#E5F7F9] transition-all font-medium text-slate-800 placeholder-[#808080] text-sm font-['Nunito']" 
                   />
                   {validationError && (
